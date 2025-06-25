@@ -475,12 +475,6 @@
         if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
         return !val;
       });
-      // 부가상품은 1개 이상 필수
-      const addonVal = document.getElementById('addon-hidden').value;
-      if(!addonVal) {
-        alert('*부가상품을 1개 이상 선택하세요.');
-        return false;
-      }
       if(emptyField) {
         alert(`${emptyField[1]} 입력/선택해 주세요.`);
         document.getElementById(emptyField[0]).focus();
