@@ -7,7 +7,10 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <style>
     body {font-family: 'Malgun Gothic', sans-serif;background: #f7faff;margin: 0;padding: 0;}
-    .banner-img {width: 100%;min-height: 160px;max-height: 400px;background: #dbeeff url('폼 사진 1600 400.png') center/cover no-repeat;display: flex;align-items: center;justify-content: center;font-size: 3rem;color: #fff;font-weight: 900;letter-spacing: 6px;box-shadow: 0 6px 32px rgba(30,60,255,0.07);margin-bottom: 20px;border-bottom: 3px solid #e5eefc;}
+    .banner-img {width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #e5eefc;}
     .wrapper {max-width: 860px;margin: auto;background: #fff;border-radius: 16px;box-shadow: 0 0 18px 0 rgba(0,0,0,0.08);padding: 45px 30px 40px 30px;}
     .header {display: flex;justify-content: space-between;align-items: flex-end;border-bottom: 1px solid #ddd;padding-bottom: 18px;margin-bottom: 36px;}
     .header h2 {font-size: 25px;font-weight: bold;margin: 0;color: #072053;}
@@ -67,7 +70,7 @@
   </style>
 </head>
 <body>
-  <div class="banner-img"></div>
+  <img src="폼 사진 1600 400.png" alt="배너" class="banner-img" style="width:100%;height:auto;display:block;">
   <div class="wrapper">
     <div class="header">
       <h2>가입신청서</h2>
