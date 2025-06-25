@@ -447,29 +447,39 @@
     // 가입신청 제출 처리
     function handleSubmit(e) {
       e.preventDefault();
-      // 필수값 체크 (Wi-Fi 제외)
-      const req = [
-        ['name', '*가입자명'],
-        ['phone', '*휴대폰번호'],
-        ['ssn', '*주민번호'],
-        ['address', '*주소'],
-        ['paytype', '*납부 방법'],
-        ['bank', '*은행명(카드명)'],
-        ['banknum', '*계좌번호'],
-        ['owner', '*예금주'],
-        ['used-telecom', '*사용중통신사'],
-        ['used-name', '*이름(사용중 핸드폰)'],
-        ['used-phone', '*사용번호'],
-        ['used-ssn', '*주민번호(사용중 핸드폰)'],
-        ['prod-telecom', '*상품 통신사'],
-        ['prod-type', '*가입상품'],
-        ['date', '*희망설치일'],
-        ['gift-bank', '*은행명(사은품)'],
-        ['gift-acc', '*사은품계좌'],
-        ['gift-owner', '*예금주(타명의)'],
-        ['gift-ssn', '*주민번호(타명의)'],
-        ['gift-phone', '*연락처(타명의)'],
-      ];
+       const data = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    ssn: document.getElementById('ssn').value,
+    address: document.getElementById('address').value,
+    email: document.getElementById('email').value,
+    paytype: document.getElementById('paytype').value,
+    bank: document.getElementById('bank').value,
+    banknum: document.getElementById('banknum').value,
+    owner: document.getElementById('owner').value,
+    'used-telecom': document.getElementById('used-telecom').value,
+    'used-name': document.getElementById('used-name').value,
+    'used-phone': document.getElementById('used-phone').value,
+    'used-ssn': document.getElementById('used-ssn').value,
+    'prod-telecom': document.getElementById('prod-telecom').value,
+    'prod-type': document.getElementById('prod-type').value,
+    wifi: document.getElementById('wifi').checked ? '신청' : '',
+    addon: document.getElementById('addon-hidden').value,
+    plan: document.getElementById('plan').value,
+    date: document.getElementById('date').value,
+    'gift-bank': document.getElementById('gift-bank').value,
+    'gift-acc': document.getElementById('gift-acc').value,
+    'gift-owner': document.getElementById('gift-owner').value,
+    'gift-ssn': document.getElementById('gift-ssn').value,
+    'gift-phone': document.getElementById('gift-phone').value,
+    'gift-amt': document.getElementById('gift-amt').value,
+    'gift-paper': document.getElementById('gift-paper').checked ? '지류' : '',
+    'gift-type': document.getElementById('gift-type').value,
+    note: document.getElementById('note').value,
+    agree: document.getElementById('agree').checked ? '동의' : '',
+    privacyAgree: document.getElementById('privacy-agree').checked ? '동의' : '',
+    eventAgree: document.getElementById('event-agree').checked ? '동의' : ''
+  };
       let emptyField = req.find(([id]) => {
         let val = document.getElementById(id)?.value;
         if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
