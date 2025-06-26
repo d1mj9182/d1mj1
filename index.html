@@ -448,6 +448,46 @@
     function handleSubmit(e) {
       e.preventDefault();
       // 필수값 체크 (Wi-Fi 제외)
+ // 가입신청 제출 처리 (아래 전체 복붙, 449~487줄)
+function handleSubmit(e) {
+  e.preventDefault();
+  const req = [
+    ['name', '*가입자명'],
+    ['phone', '*휴대폰번호'],
+    ['ssn', '*주민번호'],
+    ['address', '*주소'],
+    ['paytype', '*납부 방법'],
+    ['bank', '*은행명(카드명)'],
+    ['banknum', '*계좌번호'],
+    ['owner', '*예금주'],
+    ['used-telecom', '*사용중통신사'],
+    ['used-name', '*이름(사용중 핸드폰)'],
+    ['used-phone', '*사용번호'],
+    ['used-ssn', '*주민번호(사용중 핸드폰)'],
+    ['prod-telecom', '*상품 통신사'],
+    ['prod-type', '*가입상품'],
+    ['date', '*희망설치일'],
+    ['gift-bank', '*은행명(사은품)'],
+    ['gift-acc', '*사은품계좌'],
+    ['gift-owner', '*예금주(타명의)'],
+    ['gift-ssn', '*주민번호(타명의)'],
+    ['gift-phone', '*연락처(타명의)'],
+  ];
+  let emptyField = req.find(([id]) => {
+    let val = document.getElementById(id)?.value;
+    if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
+    return !val;
+  });
+  if(emptyField) {
+    alert(`${emptyField[1]} 입력/선택해 주세요.`);
+    document.getElementById(emptyField[0]).focus();
+    return false;
+  }
+  if(!document.getElementById('privacy-agree').checked) {
+    alert('[필수] 개인정보 수집·이용·제공 동의에 체크해 주세요.');
+    return false;
+  }
+
   const data = {
     name: document.getElementById('name').value,
     phone: document.getElementById('phone').value,
@@ -479,7 +519,7 @@
     note: document.getElementById('note').value,
     event_agree: document.getElementById('event-agree').checked ? '동의' : '미동의'
   };
-  // ② fetch로 GAS(시트+문자) 전송
+
   fetch("https://script.google.com/macros/s/AKfycbzj87psBAHGd3rad4orSpfVvuLJLTmnndf1ud0VgtODaPhM-UJQPFjhkvSQKoyGgaod/exec", {
     method: "POST",
     body: JSON.stringify(data),
@@ -496,8 +536,8 @@
   });
 
   return false;
-}      
-
+}
+      
       // 문자 전송(01071716361)
       sendSMS();
 
