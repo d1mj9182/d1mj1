@@ -445,10 +445,7 @@
       document.getElementById('addon-hidden').value = selected.join(',');
     }
     // 가입신청 제출 처리
-    function handleSubmit(e) {
-      e.preventDefault();
-      // 필수값 체크 (Wi-Fi 제외)
- // 가입신청 제출 처리 (아래 전체 복붙, 449~487줄)
+    // ========================== (여기서부터 복붙) ==========================
 function handleSubmit(e) {
   e.preventDefault();
   const req = [
@@ -537,6 +534,7 @@ function handleSubmit(e) {
 
   return false;
 }
+// ========================== (여기까지 복붙) ==========================
       
       // 문자 전송(01071716361)
       sendSMS();
