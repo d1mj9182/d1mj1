@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>가입신청서</title>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <style>
+  <style>  
     body {font-family: 'Malgun Gothic', sans-serif;background: #f7faff;margin: 0;padding: 0;}
-    .banner-img {width: 100%;
-    display: block;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #e5eefc;}
+    .banner-img {width: 100%; display: block; margin-bottom: 20px; border-bottom: 3px solid #e5eefc;}
     .wrapper {max-width: 860px;margin: auto;background: #fff;border-radius: 16px;box-shadow: 0 0 18px 0 rgba(0,0,0,0.08);padding: 45px 30px 40px 30px;}
     .header {display: flex;justify-content: space-between;align-items: flex-end;border-bottom: 1px solid #ddd;padding-bottom: 18px;margin-bottom: 36px;}
     .header h2 {font-size: 25px;font-weight: bold;margin: 0;color: #072053;}
@@ -83,32 +80,32 @@
         <table class="form-table">
           <tr>
             <th>*가입자명</th>
-            <td><input type="text" id="name"></td>
+            <td><input type="text" id="name" name="name"></td>
           </tr>
           <tr>
             <th>*휴대폰번호</th>
             <td>
-              <input type="text" id="phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)">
+              <input type="text" id="phone" name="phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)">
             </td>
           </tr>
           <tr>
             <th>*주민번호</th>
             <td>
-              <input type="text" id="ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)">
+              <input type="text" id="ssn" name="ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)">
             </td>
           </tr>
           <tr>
             <th>*주소</th>
             <td>
               <div class="address-search-wrap">
-                <input type="text" id="address" readonly>
+                <input type="text" id="address" name="address" readonly>
                 <button class="address-search-btn" onclick="execDaumPostcode(); return false;">검색</button>
               </div>
             </td>
           </tr>
           <tr>
             <th>이메일</th>
-            <td><input type="email" id="email"></td>
+            <td><input type="email" id="email" name="email"></td>
           </tr>
         </table>
       </div>
@@ -120,7 +117,7 @@
           <tr>
             <th>*납부 방법</th>
             <td>
-              <select id="paytype">
+              <select id="paytype" name="paytype">
                 <option value="">선택</option>
                 <option>자동이체</option>
                 <option>카드납부</option>
@@ -129,15 +126,15 @@
           </tr>
           <tr>
             <th>*은행명(카드명)</th>
-            <td><input type="text" id="bank"></td>
+            <td><input type="text" id="bank" name="bank"></td>
           </tr>
           <tr>
             <th>*계좌번호</th>
-            <td><input type="text" id="banknum"></td>
+            <td><input type="text" id="banknum" name="banknum"></td>
           </tr>
           <tr>
             <th>*예금주</th>
-            <td><input type="text" id="owner"></td>
+            <td><input type="text" id="owner" name="owner"></td>
           </tr>
         </table>
       </div>
@@ -149,7 +146,7 @@
           <tr>
             <th>*통신사</th>
             <td>
-              <select id="used-telecom">
+              <select id="used-telecom" name="used-telecom">
                 <option value="">선택</option>
                 <option>SK</option>
                 <option>KT</option>
@@ -163,19 +160,19 @@
           <tr>
             <th>*이름</th>
             <td>
-              <input type="text" id="used-name" placeholder="사용자명">
+              <input type="text" id="used-name" name="used-name" placeholder="사용자명">
             </td>
           </tr>
           <tr>
             <th>*사용번호<br><span class="inline-hint">(인증받을번호)</span></th>
             <td>
-              <input type="text" id="used-phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)">
+              <input type="text" id="used-phone" name="used-phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)">
             </td>
           </tr>
           <tr>
             <th>*주민번호</th>
             <td>
-              <input type="text" id="used-ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)">
+              <input type="text" id="used-ssn" name="used-ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)">
             </td>
           </tr>
         </table>
@@ -188,7 +185,7 @@
           <tr>
             <th>*통신사</th>
             <td>
-              <select id="prod-telecom">
+              <select id="prod-telecom" name="prod-telecom">
                 <option value="">선택</option>
                 <option>SK</option>
                 <option>KT</option>
@@ -201,14 +198,14 @@
           <tr>
             <th>*가입상품</th>
             <td style="display:flex;align-items:center;gap:16px;">
-              <select id="prod-type" style="flex:1;">
+              <select id="prod-type" name="prod-type" style="flex:1;">
                 <option value="">선택</option>
                 <option>인터넷</option>
                 <option>인터넷+TV</option>
                 <option>인터넷+TV+전화</option>
               </select>
               <label class="checkbox">
-                <input type="checkbox" id="wifi" style="width:auto;" checked> Wi-Fi 신청
+                <input type="checkbox" id="wifi" name="wifi" value="신청" style="width:auto;" checked> Wi-Fi 신청
               </label>
             </td>
           </tr>
@@ -220,16 +217,16 @@
                 <button type="button" class="addon-btn" data-value="정수기" onclick="toggleAddon(this)">정수기</button>
                 <button type="button" class="addon-btn" data-value="CCTV" onclick="toggleAddon(this)">CCTV</button>
               </div>
-              <input type="hidden" id="addon-hidden">
+              <input type="hidden" id="addon-hidden" name="addon">
             </td>
           </tr>
           <tr>
             <th>요금제</th>
-            <td><input type="text" id="plan"></td>
+            <td><input type="text" id="plan" name="plan"></td>
           </tr>
           <tr>
             <th>*희망 설치일</th>
-            <td><input type="date" id="date"></td>
+            <td><input type="date" id="date" name="date"></td>
           </tr>
         </table>
       </div>
@@ -240,128 +237,91 @@
         <table class="form-table">
           <tr>
             <th>*은행명</th>
-            <td><input type="text" id="gift-bank"></td>
+            <td><input type="text" id="gift-bank" name="gift-bank"></td>
           </tr>
           <tr>
             <th>*사은품계좌</th>
-            <td><input type="text" id="gift-acc"></td>
+            <td><input type="text" id="gift-acc" name="gift-acc"></td>
           </tr>
           <tr>
             <th>*예금주(타명의)</th>
-            <td><input type="text" id="gift-owner"></td>
+            <td><input type="text" id="gift-owner" name="gift-owner"></td>
           </tr>
           <tr>
             <th>*주민번호(타명의)</th>
-            <td><input type="text" id="gift-ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)"></td>
+            <td><input type="text" id="gift-ssn" name="gift-ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)"></td>
           </tr>
           <tr>
             <th>*연락처(타명의)</th>
-  <td><input type="text" id="gift-phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)"></td>
+            <td><input type="text" id="gift-phone" name="gift-phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)"></td>
           </tr>
           <tr>
             <th>상품권-금액</th>
             <td>
               <div class="gift-inline">
-                <input type="text" id="gift-amt" placeholder="상품권명 3~10만원 등">
-                <label class="gift-label"><input type="checkbox" id="gift-paper" style="width:auto;">지류</label>
+                <input type="text" id="gift-amt" name="gift-amt" placeholder="상품권명 3~10만원 등">
+                <label class="gift-label"><input type="checkbox" id="gift-paper" name="gift-paper" value="지류" style="width:auto;">지류</label>
               </div>
             </td>
           </tr>
           <tr>
             <th>상품권 종류</th>
             <td>
-              <select id="gift-type">
-                <option>선택</option>
-                <optgroup label="3만원권">
-                  <option>모바일 : 농협 - 3만원권</option>
-                  <option>모바일 : 이마트 - 3만원권</option>
-                  <option>모바일 : 홈플러스 - 3만원권</option>
-                  <option>모바일 : 롯데 - 3만원권</option>
-                  <option>모바일 : 현대 - 3만원권</option>
-                  <option>모바일 : kt통합상품권 - 3만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 3만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 3만원권</option>
-                  <option>지류 : 농협 - 3만원권</option>
-                </optgroup>
-                <optgroup label="4만원권">
-                  <option>모바일 : 농협 - 4만원권</option>
-                  <option>모바일 : 이마트 - 4만원권</option>
-                  <option>모바일 : 홈플러스 - 4만원권</option>
-                  <option>모바일 : 롯데 - 4만원권</option>
-                  <option>모바일 : 현대 - 4만원권</option>
-                  <option>모바일 : kt통합상품권 - 4만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 4만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 4만원권</option>
-                  <option>모바일 : 롯데마트모바일금액권 - 4만원권</option>
-                  <option>모바일 : 네이버페이포인트 - 4만원권</option>
-                  <option>모바일 : GS칼텍스 모바일주유 - 4만원권</option>
-                  <option>지류 : 농협 - 4만원권</option>
-                </optgroup>
-                <optgroup label="5만원권">
-                  <option>모바일 : 농협 - 5만원권</option>
-                  <option>모바일 : 이마트 - 5만원권</option>
-                  <option>모바일 : 홈플러스 - 5만원권</option>
-                  <option>모바일 : 롯데 - 5만원권</option>
-                  <option>모바일 : 현대 - 5만원권</option>
-                  <option>모바일 : kt통합상품권 - 5만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 5만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 5만원권</option>
-                  <option>모바일 : 롯데마트모바일금액권 - 5만원권</option>
-                  <option>모바일 : 네이버페이포인트 - 5만원권</option>
-                  <option>모바일 : GS칼텍스 모바일주유 - 5만원권</option>
-                  <option>지류 : 농협 - 5만원권</option>
-                </optgroup>
-                <optgroup label="6만원권">
-                  <option>모바일 : 농협 - 6만원권</option>
-                  <option>모바일 : 이마트 - 6만원권</option>
-                  <option>모바일 : 홈플러스 - 6만원권</option>
-                  <option>모바일 : 롯데 - 6만원권</option>
-                  <option>모바일 : kt통합상품권 - 6만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 6만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 6만원권</option>
-                  <option>모바일 : 롯데마트모바일금액권 - 6만원권</option>
-                  <option>모바일 : 네이버페이포인트 - 6만원권</option>
-                  <option>모바일 : GS칼텍스 모바일주유 - 6만원권</option>
-                  <option>지류 : 농협 - 6만원권</option>
-                </optgroup>
-                <optgroup label="7만원권">
-                  <option>모바일 : 농협 - 7만원권</option>
-                  <option>모바일 : 이마트 - 7만원권</option>
-                  <option>모바일 : 홈플러스 - 7만원권</option>
-                  <option>모바일 : 롯데 - 7만원권</option>
-                  <option>모바일 : kt통합상품권 - 7만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 7만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 7만원권</option>
-                  <option>모바일 : 롯데마트모바일금액권 - 7만원권</option>
-                  <option>모바일 : 네이버페이포인트 - 7만원권</option>
-                  <option>지류 : 농협 - 7만원권</option>
-                </optgroup>
-                <optgroup label="9만원권">
-                  <option>모바일 : 농협 - 9만원권</option>
-                  <option>모바일 : 이마트 - 9만원권</option>
-                  <option>모바일 : 홈플러스 - 9만원권</option>
-                  <option>모바일 : 롯데 - 9만원권</option>
-                  <option>모바일 : 현대 - 9만원권</option>
-                  <option>모바일 : kt통합상품권 - 9만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 9만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 9만원권</option>
-                  <option>모바일 : 롯데마트모바일금액권 - 9만원권</option>
-                  <option>모바일 : 네이버페이포인트 - 9만원권</option>
-                  <option>지류 : 농협 - 9만원권</option>
-                </optgroup>
-                <optgroup label="10만원권">
-                  <option>모바일 : 농협 - 10만원권</option>
-                  <option>모바일 : 이마트 - 10만원권</option>
-                  <option>모바일 : 홈플러스 - 10만원권</option>
-                  <option>모바일 : 롯데 - 10만원권</option>
-                  <option>모바일 : kt통합상품권 - 10만원권</option>
-                  <option>모바일 : 농협모바일금액권 - 10만원권</option>
-                  <option>모바일 : 다이소모바일금액권 - 10만원권</option>
-                  <option>모바일 : 롯데마트모바일금액권 - 10만원권</option>
-                  <option>모바일 : 네이버페이포인트 - 10만원권</option>
-                  <option>지류 : 농협 - 10만원권</option>
-                </optgroup>
-              </select>
+              <select id="gift-type" name="gift-type">
+  <option>선택</option>
+  <optgroup label="3만원권">
+    <option>모바일 : 농협 - 3만원권</option>
+    <option>모바일 : 이마트 - 3만원권</option>
+    <option>모바일 : 홈플러스 - 3만원권</option>
+    <option>모바일 : 롯데 - 3만원권</option>
+    <option>모바일 : 현대 - 3만원권</option>
+    <option>모바일 : kt통합상품권 - 3만원권</option>
+    <option>모바일 : 농협모바일금액권 - 3만원권</option>
+    <option>모바일 : 다이소모바일금액권 - 3만원권</option>
+    <option>지류 : 농협 - 3만원권</option>
+  </optgroup>
+  <optgroup label="4만원권">
+    <option>모바일 : 농협 - 4만원권</option>
+    <option>모바일 : 이마트 - 4만원권</option>
+    <option>모바일 : 홈플러스 - 4만원권</option>
+    <option>모바일 : 롯데 - 4만원권</option>
+    <option>모바일 : 현대 - 4만원권</option>
+    <option>모바일 : kt통합상품권 - 4만원권</option>
+    <option>모바일 : 농협모바일금액권 - 4만원권</option>
+    <option>모바일 : 다이소모바일금액권 - 4만원권</option>
+    <option>모바일 : 롯데마트모바일금액권 - 4만원권</option>
+    <option>모바일 : 네이버페이포인트 - 4만원권</option>
+    <option>모바일 : GS칼텍스 모바일주유 - 4만원권</option>
+    <option>지류 : 농협 - 4만원권</option>
+  </optgroup>
+  <optgroup label="5만원권">
+    <option>모바일 : 농협 - 5만원권</option>
+    <option>모바일 : 이마트 - 5만원권</option>
+    <option>모바일 : 홈플러스 - 5만원권</option>
+    <option>모바일 : 롯데 - 5만원권</option>
+    <option>모바일 : 현대 - 5만원권</option>
+    <option>모바일 : kt통합상품권 - 5만원권</option>
+    <option>모바일 : 농협모바일금액권 - 5만원권</option>
+    <option>모바일 : 다이소모바일금액권 - 5만원권</option>
+    <option>모바일 : 롯데마트모바일금액권 - 5만원권</option>
+    <option>모바일 : 네이버페이포인트 - 5만원권</option>
+    <option>모바일 : GS칼텍스 모바일주유 - 5만원권</option>
+    <option>지류 : 농협 - 5만원권</option>
+  </optgroup>
+  <optgroup label="6만원권">
+    <option>모바일 : 농협 - 6만원권</option>
+    <option>모바일 : 이마트 - 6만원권</option>
+    <option>모바일 : 홈플러스 - 6만원권</option>
+    <option>모바일 : 롯데 - 6만원권</option>
+    <option>모바일 : kt통합상품권 - 6만원권</option>
+    <option>모바일 : 농협모바일금액권 - 6만원권</option>
+    <option>모바일 : 다이소모바일금액권 - 6만원권</option>
+    <option>모바일 : 롯데마트모바일금액권 - 6만원권</option>
+    <option>모바일 : 네이버페이포인트 - 6만원권</option>
+    <option>모바일 : GS칼텍스 모바일주유 - 6만원권</option>
+    <option>지류 : 농협 - 6만원권</option>
+  </optgroup>
+</select>
             </td>
           </tr>
         </table>
@@ -370,16 +330,16 @@
       <!-- 요청사항 -->
       <div class="section">
         <h3>요청사항</h3>
-        <textarea id="note" placeholder="남기실 말씀 또는 요청사항"></textarea>
+        <textarea id="note" name="note" placeholder="남기실 말씀 또는 요청사항"></textarea>
       </div>
 
       <!-- 약관동의 -->
       <div class="section">
         <h3>약관동의</h3>
         <div class="terms-box">
-          <label><input type="checkbox" id="agree"> 모든 약관에 동의합니다</label>
+          <label><input type="checkbox" id="agree" name="agree" value="동의"> 모든 약관에 동의합니다</label>
           <div style="margin-top:10px;">
-            <label style="font-weight:bold;"><input type="checkbox" id="privacy-agree"> [필수] 개인정보 수집·이용·제공 동의</label>
+            <label style="font-weight:bold;"><input type="checkbox" id="privacy-agree" name="privacyAgree" value="동의"> [필수] 개인정보 수집·이용·제공 동의</label>
           </div>
           <ul class="terms-list">
             <li>수집항목: 성명, 연락처, 주민번호, 계좌번호 등</li>
@@ -388,7 +348,7 @@
             <li>동의 거부 시 서비스 이용이 제한될 수 있습니다.</li>
           </ul>
           <div class="terms-option-wrap">
-            <input type="checkbox" id="event-agree" class="terms-option-checkbox">
+            <input type="checkbox" id="event-agree" name="eventAgree" class="terms-option-checkbox" value="동의">
             <div>
               <div class="terms-option-title">[선택] 이벤트/프로모션 정보 수집·이용 동의</div>
               <div class="terms-text-section" style="margin-bottom:0;">
@@ -444,72 +404,58 @@
       let selected = Array.from(document.querySelectorAll('.addon-btn.selected')).map(b=>b.dataset.value);
       document.getElementById('addon-hidden').value = selected.join(',');
     }
-    // 가입신청 제출 처리
+    // 가입신청 제출 처리 (FormData로 한번에 보내기)
     function handleSubmit(e) {
       e.preventDefault();
-       const data = {
-    name: document.getElementById('name').value,
-    phone: document.getElementById('phone').value,
-    ssn: document.getElementById('ssn').value,
-    address: document.getElementById('address').value,
-    email: document.getElementById('email').value,
-    paytype: document.getElementById('paytype').value,
-    bank: document.getElementById('bank').value,
-    banknum: document.getElementById('banknum').value,
-    owner: document.getElementById('owner').value,
-    'used-telecom': document.getElementById('used-telecom').value,
-    'used-name': document.getElementById('used-name').value,
-    'used-phone': document.getElementById('used-phone').value,
-    'used-ssn': document.getElementById('used-ssn').value,
-    'prod-telecom': document.getElementById('prod-telecom').value,
-    'prod-type': document.getElementById('prod-type').value,
-    wifi: document.getElementById('wifi').checked ? '신청' : '',
-    addon: document.getElementById('addon-hidden').value,
-    plan: document.getElementById('plan').value,
-    date: document.getElementById('date').value,
-    'gift-bank': document.getElementById('gift-bank').value,
-    'gift-acc': document.getElementById('gift-acc').value,
-    'gift-owner': document.getElementById('gift-owner').value,
-    'gift-ssn': document.getElementById('gift-ssn').value,
-    'gift-phone': document.getElementById('gift-phone').value,
-    'gift-amt': document.getElementById('gift-amt').value,
-    'gift-paper': document.getElementById('gift-paper').checked ? '지류' : '',
-    'gift-type': document.getElementById('gift-type').value,
-    note: document.getElementById('note').value,
-    agree: document.getElementById('agree').checked ? '동의' : '',
-    privacyAgree: document.getElementById('privacy-agree').checked ? '동의' : '',
-    eventAgree: document.getElementById('event-agree').checked ? '동의' : ''
-  };
-      let emptyField = req.find(([id]) => {
-        let val = document.getElementById(id)?.value;
-        if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
-        return !val;
-      });
-      if(emptyField) {
-        alert(`${emptyField[1]} 입력/선택해 주세요.`);
-        document.getElementById(emptyField[0]).focus();
-        return false;
+      const form = document.getElementById('applicationForm');
+      const formData = new FormData(form);
+
+      // 필수값 검사
+      const reqFields = [
+        ['name','가입자명'], ['phone','휴대폰번호'], ['ssn','주민번호'], ['address','주소'],
+        ['paytype','납부방법'], ['bank','은행명(카드명)'], ['banknum','계좌번호'], ['owner','예금주'],
+        ['used-telecom','사용중통신사'], ['used-name','사용자명'], ['used-phone','사용번호'],
+        ['used-ssn','사용주민번호'], ['prod-telecom','상품통신사'], ['prod-type','가입상품'],
+        ['date','희망설치일'], ['gift-bank','사은품은행'], ['gift-acc','사은품계좌'], ['gift-owner','사은품예금주'],
+        ['gift-ssn','사은품주민번호'], ['gift-phone','사은품연락처']
+      ];
+      for(let [id, label] of reqFields){
+        let el = document.getElementById(id);
+        if(el && (!el.value || el.value === '선택')){
+          alert(${label} 입력/선택해 주세요.);
+          el.focus();
+          return false;
+        }
       }
-      if(!document.getElementById('privacy-agree').checked) {
+      if(!document.getElementById('privacy-agree').checked){
         alert('[필수] 개인정보 수집·이용·제공 동의에 체크해 주세요.');
         return false;
       }
 
-      // 문자 전송(01071716361)
-      sendSMS();
-
-      alert('가입신청이 완료되었습니다. 감사합니다!');
-      window.location.href = 'thanks.html';
+      // 폼데이터 전송 (GAS Web App 주소로 수정!)
+      fetch('https://script.google.com/macros/s/AKfycbwcEhTAqbZZX76Z6QLBfEJmw3zmTkDnKLg7OBJ3SJGX304ynMz-YNAkfi58DTSZ2mw0JA/exec', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(txt => {
+        // 문자 전송(01071716361) (선택)
+        sendSMS();
+        alert('가입신청이 완료되었습니다. 감사합니다!');
+        window.location.href = 'thanks.html';
+      })
+      .catch(err => {
+        alert('오류가 발생했습니다: ' + err);
+      });
       return false;
     }
 
     // ---- 문자 전송 함수 (Naver SENS, 예시: fetch POST로 구현) ----
     function sendSMS() {
-      // 실제로는 서버나 GAS 등에서 보안상 처리 필요
       fetch("https://script.google.com/macros/s/AKfycbwcEhTAqbZZX76Z6QLBfEJmw3zmTkDnKLg7OBJ3SJGX304ynMz-YNAkfi58DTSZ2mw0JA/exec", {
         method: "POST",
         body: JSON.stringify({
-          phone: "01071716361", // 알림 받을 번호
+          phone: "01071716361",
           msg: "[신청알림] 신규 가입신청이 접수되었습니다."
         }),
         headers: { "Content-Type": "application/json" }
@@ -517,29 +463,30 @@
       .then(res => {})
       .catch(err => {});
     }
-// 약관동의(전체-필수-선택) 동기화
-document.addEventListener('DOMContentLoaded', function() {
-  const all = document.getElementById('agree');
-  const privacy = document.getElementById('privacy-agree');
-  const event = document.getElementById('event-agree');
 
-  // '전체동의' 클릭 시 하위 모두 체크/해제
-  all.addEventListener('change', function() {
-    privacy.checked = all.checked;
-    event.checked = all.checked;
-  });
+    // 약관동의(전체-필수-선택) 동기화
+    document.addEventListener('DOMContentLoaded', function() {
+      const all = document.getElementById('agree');
+      const privacy = document.getElementById('privacy-agree');
+      const event = document.getElementById('event-agree');
 
-  // 하위(필수/선택) 변경 시 전체동의 동기화
-  [privacy, event].forEach(function(box) {
-    box.addEventListener('change', function() {
-      if (privacy.checked && event.checked) {
-        all.checked = true;
-      } else {
-        all.checked = false;
-      }
+      // '전체동의' 클릭 시 하위 모두 체크/해제
+      all.addEventListener('change', function() {
+        privacy.checked = all.checked;
+        event.checked = all.checked;
+      });
+
+      // 하위(필수/선택) 변경 시 전체동의 동기화
+      [privacy, event].forEach(function(box) {
+        box.addEventListener('change', function() {
+          if (privacy.checked && event.checked) {
+            all.checked = true;
+          } else {
+            all.checked = false;
+          }
+        });
+      });
     });
-  });
-});
   </script>
 </body>
 </html>
