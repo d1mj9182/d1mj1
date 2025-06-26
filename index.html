@@ -74,7 +74,7 @@
   <div class="wrapper">
     <div class="header">
       <h2>가입신청서</h2>
-      <p>신청완료 후 담당자가 확인 후 연락드립니다.3</p>
+      <p>신청완료 후 담당자가 확인 후 연락드립니다.4</p>
     </div>
     <form id="applicationForm" onsubmit="return handleSubmit(event)">
       <!-- 가입자정보 -->
@@ -486,36 +486,39 @@ function handleSubmit(e) {
   }
 
   const data = {
-    name: document.getElementById('name').value,
-    phone: document.getElementById('phone').value,
-    ssn: document.getElementById('ssn').value,
-    address: document.getElementById('address').value,
-    email: document.getElementById('email').value,
-    paytype: document.getElementById('paytype').value,
-    bank: document.getElementById('bank').value,
-    banknum: document.getElementById('banknum').value,
-    owner: document.getElementById('owner').value,
-    used_telecom: document.getElementById('used-telecom').value,
-    used_name: document.getElementById('used-name').value,
-    used_phone: document.getElementById('used-phone').value,
-    used_ssn: document.getElementById('used-ssn').value,
-    prod_telecom: document.getElementById('prod-telecom').value,
-    prod_type: document.getElementById('prod-type').value,
-    wifi: document.getElementById('wifi').checked ? '신청' : '미신청',
-    addon: document.getElementById('addon-hidden').value,
-    plan: document.getElementById('plan').value,
-    date: document.getElementById('date').value,
-    gift_bank: document.getElementById('gift-bank').value,
-    gift_acc: document.getElementById('gift-acc').value,
-    gift_owner: document.getElementById('gift-owner').value,
-    gift_ssn: document.getElementById('gift-ssn').value,
-    gift_phone: document.getElementById('gift-phone').value,
-    gift_amt: document.getElementById('gift-amt').value,
-    gift_paper: document.getElementById('gift-paper').checked ? '지류' : '',
-    gift_type: document.getElementById('gift-type').value,
-    note: document.getElementById('note').value,
-    event_agree: document.getElementById('event-agree').checked ? '동의' : '미동의'
-  };
+  name: document.getElementById('name').value,
+  phone: document.getElementById('phone').value,
+  ssn: document.getElementById('ssn').value,
+  address: document.getElementById('address').value,
+  email: document.getElementById('email').value,
+  paytype: document.getElementById('paytype').value,
+  bank: document.getElementById('bank').value,
+  banknum: document.getElementById('banknum').value,
+  owner: document.getElementById('owner').value,
+  "used-telecom": document.getElementById('used-telecom').value,
+  "used-name": document.getElementById('used-name').value,
+  "used-phone": document.getElementById('used-phone').value,
+  "used-ssn": document.getElementById('used-ssn').value,
+  "prod-telecom": document.getElementById('prod-telecom').value,
+  "prod-type": document.getElementById('prod-type').value,
+  wifi: document.getElementById('wifi').checked ? '신청' : '미신청',
+  addon: document.getElementById('addon-hidden').value,
+  plan: document.getElementById('plan').value,
+  date: document.getElementById('date').value,
+  "gift-bank": document.getElementById('gift-bank').value,
+  "gift-acc": document.getElementById('gift-acc').value,
+  "gift-owner": document.getElementById('gift-owner').value,
+  "gift-ssn": document.getElementById('gift-ssn').value,
+  "gift-phone": document.getElementById('gift-phone').value,
+  "gift-amt": document.getElementById('gift-amt').value,
+  "gift-paper": document.getElementById('gift-paper').checked ? '지류' : '',
+  "gift-type": document.getElementById('gift-type').value,
+  note: document.getElementById('note').value,
+  agree: document.getElementById('agree').checked ? '동의' : '미동의',
+  privacyAgree: document.getElementById('privacy-agree').checked ? '동의' : '미동의',
+  eventAgree: document.getElementById('event-agree').checked ? '동의' : '미동의'
+};
+
 
   fetch("https://script.google.com/macros/s/AKfycbwcEhTAqbZZX76Z6QLBfEJmw3zmTkDnKLg7OBJ3SJGX304ynMz-YNAkfi58DTSZ2mw0JA/exec", {
   method: "POST",
