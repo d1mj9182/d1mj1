@@ -448,42 +448,55 @@
     function handleSubmit(e) {
       e.preventDefault();
       // 필수값 체크 (Wi-Fi 제외)
-      const req = [
-        ['name', '*가입자명'],
-        ['phone', '*휴대폰번호'],
-        ['ssn', '*주민번호'],
-        ['address', '*주소'],
-        ['paytype', '*납부 방법'],
-        ['bank', '*은행명(카드명)'],
-        ['banknum', '*계좌번호'],
-        ['owner', '*예금주'],
-        ['used-telecom', '*사용중통신사'],
-        ['used-name', '*이름(사용중 핸드폰)'],
-        ['used-phone', '*사용번호'],
-        ['used-ssn', '*주민번호(사용중 핸드폰)'],
-        ['prod-telecom', '*상품 통신사'],
-        ['prod-type', '*가입상품'],
-        ['date', '*희망설치일'],
-        ['gift-bank', '*은행명(사은품)'],
-        ['gift-acc', '*사은품계좌'],
-        ['gift-owner', '*예금주(타명의)'],
-        ['gift-ssn', '*주민번호(타명의)'],
-        ['gift-phone', '*연락처(타명의)'],
-      ];
-      let emptyField = req.find(([id]) => {
-        let val = document.getElementById(id)?.value;
-        if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
-        return !val;
-      });
-      if(emptyField) {
-        alert(`${emptyField[1]} 입력/선택해 주세요.`);
-        document.getElementById(emptyField[0]).focus();
-        return false;
-      }
-      if(!document.getElementById('privacy-agree').checked) {
-        alert('[필수] 개인정보 수집·이용·제공 동의에 체크해 주세요.');
-        return false;
-      }
+  const data = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    ssn: document.getElementById('ssn').value,
+    address: document.getElementById('address').value,
+    email: document.getElementById('email').value,
+    paytype: document.getElementById('paytype').value,
+    bank: document.getElementById('bank').value,
+    banknum: document.getElementById('banknum').value,
+    owner: document.getElementById('owner').value,
+    used_telecom: document.getElementById('used-telecom').value,
+    used_name: document.getElementById('used-name').value,
+    used_phone: document.getElementById('used-phone').value,
+    used_ssn: document.getElementById('used-ssn').value,
+    prod_telecom: document.getElementById('prod-telecom').value,
+    prod_type: document.getElementById('prod-type').value,
+    wifi: document.getElementById('wifi').checked ? '신청' : '미신청',
+    addon: document.getElementById('addon-hidden').value,
+    plan: document.getElementById('plan').value,
+    date: document.getElementById('date').value,
+    gift_bank: document.getElementById('gift-bank').value,
+    gift_acc: document.getElementById('gift-acc').value,
+    gift_owner: document.getElementById('gift-owner').value,
+    gift_ssn: document.getElementById('gift-ssn').value,
+    gift_phone: document.getElementById('gift-phone').value,
+    gift_amt: document.getElementById('gift-amt').value,
+    gift_paper: document.getElementById('gift-paper').checked ? '지류' : '',
+    gift_type: document.getElementById('gift-type').value,
+    note: document.getElementById('note').value,
+    event_agree: document.getElementById('event-agree').checked ? '동의' : '미동의'
+  };
+  // ② fetch로 GAS(시트+문자) 전송
+  fetch("https://script.google.com/macros/s/AKfycbzj87psBAHGd3rad4orSpfVvuLJLTmnndf1ud0VgtODaPhM-UJQPFjhkvSQKoyGgaod/exec", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.json())
+  .then(result => {
+    alert('가입신청이 완료되었습니다. 감사합니다!');
+    window.location.href = 'thanks.html';
+  })
+  .catch(err => {
+    alert('신청 저장에 실패했습니다. 다시 시도해주세요!');
+    console.error(err);
+  });
+
+  return false;
+}      
 
       // 문자 전송(01071716361)
       sendSMS();
@@ -491,21 +504,6 @@
       alert('가입신청이 완료되었습니다. 감사합니다!');
       window.location.href = 'thanks.html';
       return false;
-    }
-
-    // ---- 문자 전송 함수 (Naver SENS, 예시: fetch POST로 구현) ----
-    function sendSMS() {
-      // 실제로는 서버나 GAS 등에서 보안상 처리 필요
-      fetch("https://script.google.com/macros/s/AKfycbzj87psBAHGd3rad4orSpfVvuLJLTmnndf1ud0VgtODaPhM-UJQPFjhkvSQKoyGgaod/exec", {
-        method: "POST",
-        body: JSON.stringify({
-          phone: "01071716361", // 알림 받을 번호
-          msg: "[신청알림] 신규 가입신청이 접수되었습니다."
-        }),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(res => {})
-      .catch(err => {});
     }
 // 약관동의(전체-필수-선택) 동기화
 document.addEventListener('DOMContentLoaded', function() {
