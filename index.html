@@ -438,7 +438,7 @@
         el.value = val.slice(0,3) + '-' + val.slice(3,7) + '-' + val.slice(7,11);
       }
     }
-    // 부가상품 버튼 토글
+    // 부가상품 버튼 토글1
     function toggleAddon(btn) {
       btn.classList.toggle('selected');
       let selected = Array.from(document.querySelectorAll('.addon-btn.selected')).map(b=>b.dataset.value);
@@ -486,7 +486,7 @@ function handleSubmit(e) {
   }
 
   const data = {
-  이름: document.getElementById('name').value,
+  가입자명: document.getElementById('name').value,
   휴대폰번호: document.getElementById('phone').value,
   주민번호: document.getElementById('ssn').value,
   주소: document.getElementById('address').value,
