@@ -526,8 +526,12 @@ function handleSubmit(e) {
 })
 .then(res => res.text())
 .then(result => {
-  alert('가입신청이 완료되었습니다. 감사합니다!');
-  window.location.href = 'thanks.html';
+  if(result.includes('완료')) {
+    alert('가입신청이 완료되었습니다. 감사합니다!');
+    window.location.href = 'thanks.html';
+  } else {
+    alert(result); // 에러 메시지 그대로 노출
+  }
 })
 .catch(err => {
   alert('신청 저장에 실패했습니다. 다시 시도해주세요!');
