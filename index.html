@@ -109,7 +109,6 @@
           </tr>
         </table>
       </div>
-
       <!-- 납부자정보 -->
       <div class="section">
         <h3>납부자정보</h3>
@@ -138,7 +137,6 @@
           </tr>
         </table>
       </div>
-
       <!-- 사용중 핸드폰 -->
       <div class="section">
         <h3>사용중 핸드폰</h3>
@@ -175,7 +173,6 @@
               <input type="text" id="used-ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)">
             </td>
           </tr>
-          <!-- 체크박스 + 설명문구 오른쪽 -->
           <tr>
             <th></th>
             <td>
@@ -186,7 +183,6 @@
           </tr>
         </table>
       </div>
-
       <!-- 상품정보 -->
       <div class="section">
         <h3>상품정보</h3>
@@ -218,21 +214,20 @@
               </label>
             </td>
           </tr>
-          <!-- 부가상품 영역 -->
-<tr>
-  <th>*부가상품</th>
-  <td>
-    <div class="addon-btns">
-  <button type="button" class="addon-btn" data-value="유심" onclick="toggleAddon(this)">유심</button>
-  <button type="button" class="addon-btn" data-value="TV추가" onclick="toggleAddon(this)">
-    TV추가 <span style="font-size:13px;color:#666;margin-left:7px;">(TV 추가 신청시 체크)</span>
-  </button>
-  <button type="button" class="addon-btn" data-value="정수기" onclick="toggleAddon(this)">정수기</button>
-  <button type="button" class="addon-btn" data-value="CCTV" onclick="toggleAddon(this)">CCTV</button>
-</div>
-<input type="hidden" id="addon-hidden">
-  </td>
-</tr>
+          <tr>
+            <th>*부가상품</th>
+            <td>
+              <div class="addon-btns">
+                <button type="button" class="addon-btn" data-value="유심" onclick="toggleAddon(this)">유심</button>
+                <button type="button" class="addon-btn" data-value="TV추가" onclick="toggleAddon(this)">
+                  TV추가 <span style="font-size:13px;color:#666;margin-left:7px;">(TV 추가 신청시 체크)</span>
+                </button>
+                <button type="button" class="addon-btn" data-value="정수기" onclick="toggleAddon(this)">정수기</button>
+                <button type="button" class="addon-btn" data-value="CCTV" onclick="toggleAddon(this)">CCTV</button>
+              </div>
+              <input type="hidden" id="addon-hidden">
+            </td>
+          </tr>
           <tr>
             <th>요금제</th>
             <td><input type="text" id="plan"></td>
@@ -243,7 +238,6 @@
           </tr>
         </table>
       </div>
-
       <!-- 사은품 정보 -->
       <div class="section">
         <h3>사은품 정보</h3>
@@ -384,13 +378,11 @@
           </tr>
         </table>
       </div>
-
       <!-- 요청사항 -->
       <div class="section">
         <h3>요청사항</h3>
         <textarea id="note" placeholder="남기실 말씀 또는 요청사항"></textarea>
       </div>
-
       <!-- 약관동의 -->
       <div class="section">
         <h3>약관동의</h3>
@@ -427,9 +419,7 @@
       </div>
     </form>
   </div>
-
   <script>
-    // 주소 검색
     function execDaumPostcode() {
       new daum.Postcode({
         oncomplete: function(data) {
@@ -437,13 +427,11 @@
         }
       }).open();
     }
-    // 주민번호 자동 하이픈
     function autoDashSSN(el) {
       let val = el.value.replace(/[^0-9]/g,'');
       if(val.length > 6) val = val.slice(0,6) + '-' + val.slice(6,13);
       el.value = val.slice(0,14);
     }
-    // 전화번호 자동 하이픈
     function autoDashPhone(el) {
       let val = el.value.replace(/[^0-9]/g,'');
       if(val.length < 4) {
@@ -456,183 +444,170 @@
         el.value = val.slice(0,3) + '-' + val.slice(3,7) + '-' + val.slice(7,11);
       }
     }
-    // 부가상품 버튼 토글
-    // JS
-function toggleAddon(btn) {
-  btn.classList.toggle('selected');
-  let selected = Array.from(document.querySelectorAll('.addon-btn.selected')).map(b => b.dataset.value);
-  document.getElementById('addon-hidden').value = selected.join(',');
-}
-    // 가입신청 제출 처리
-function handleSubmit(e) {
-  e.preventDefault();
-  const req = [
-    ['name', '*가입자명'],
-    ['phone', '*휴대폰번호'],
-    ['ssn', '*주민번호'],
-    ['address', '*주소'],
-    ['paytype', '*납부 방법'],
-    ['bank', '*은행명(카드명)'],
-    ['banknum', '*계좌번호'],
-    ['owner', '*예금주'],
-    ['used-telecom', '*사용중통신사'],
-    ['used-name', '*이름(사용중 핸드폰)'],
-    ['used-phone', '*사용번호'],
-    ['used-ssn', '*주민번호(사용중 핸드폰)'],
-    ['prod-telecom', '*상품 통신사'],
-    ['prod-type', '*가입상품'],
-    ['date', '*희망설치일'],
-    ['gift-bank', '*은행명(사은품)'],
-    ['gift-acc', '*사은품계좌'],
-    ['gift-owner', '*예금주(타명의)'],
-    ['gift-ssn', '*주민번호(타명의)'],
-    ['gift-phone', '*연락처(타명의)'],
-  ];
-  let emptyField = req.find(([id]) => {
-    let val = document.getElementById(id)?.value;
-    if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
-    return !val;
-  });
-  if(emptyField) {
-    alert(`${emptyField[1]} 입력/선택해 주세요.`);
-    document.getElementById(emptyField[0]).focus();
-    return false;
-  }
-  if(!document.getElementById('privacy-agree').checked) {
-    alert('[필수] 개인정보 수집·이용·제공 동의에 체크해 주세요.');
-    return false;
-  }
-
-  const data = {
-    이름: document.getElementById('name').value,
-    휴대폰번호: document.getElementById('phone').value,
-    주민번호: document.getElementById('ssn').value,
-    주소: document.getElementById('address').value,
-    이메일: document.getElementById('email').value,
-    납부방법: document.getElementById('paytype').value,
-    '은행명(카드명)': document.getElementById('bank').value,
-    계좌번호: document.getElementById('banknum').value,
-    예금주: document.getElementById('owner').value,
-    사용중통신사: document.getElementById('used-telecom').value,
-    사용자명: document.getElementById('used-name').value,
-    사용번호: document.getElementById('used-phone').value,
-    사용주민번호: document.getElementById('used-ssn').value,
-    상품통신사: document.getElementById('prod-telecom').value,
-    가입상품: document.getElementById('prod-type').value,
-    'Wi-Fi': document.getElementById('wifi').checked ? '신청' : '미신청',
-    부가상품: document.getElementById('addon-hidden').value,
-    요금제: document.getElementById('plan').value,
-    희망설치일: document.getElementById('date').value,
-    사은품은행: document.getElementById('gift-bank').value,
-    사은품계좌: document.getElementById('gift-acc').value,
-    사은품예금주: document.getElementById('gift-owner').value,
-    사은품주민번호: document.getElementById('gift-ssn').value,
-    사은품연락처: document.getElementById('gift-phone').value,
-    '상품권-금액': document.getElementById('gift-amt').value,
-    상품권지류: document.getElementById('gift-paper').checked ? '지류' : '',
-    상품권종류: document.getElementById('gift-type').value,
-    요청사항: document.getElementById('note').value,
-    약관동의: document.getElementById('agree').checked ? '동의' : '미동의',
-    개인정보동의: document.getElementById('privacy-agree').checked ? '동의' : '미동의',
-    이벤트동의: document.getElementById('event-agree').checked ? '동의' : '미동의'
-  };
-
-  // 진단 로그: 전송되는 데이터 전체 출력
-  console.log('가입신청 전송 데이터:', data);
-
-  fetch("https://script.google.com/macros/s/AKfycbwzdJ-DJ1FiSp0btZ90m8laF_b05s_OpA5_4X-HQYnazGKiuHxAj3R2jz_xnyKGejgxNw/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(data).toString()
-  })
-  .then(res => res.text())
-  .then(result => {
-    // 진단 로그: 서버에서 내려준 응답 원문을 F12 콘솔에 출력
-    console.log('가입신청 서버 응답:', result);
-    if(result.includes('완료')) {
-      alert('가입신청이 완료되었습니다. 감사합니다!');
-      window.location.href = 'thanks.html';
-    } else {
-      alert(result); // 에러 메시지 그대로 노출
+    function toggleAddon(btn) {
+      btn.classList.toggle('selected');
+      let selected = Array.from(document.querySelectorAll('.addon-btn.selected')).map(b => b.dataset.value);
+      document.getElementById('addon-hidden').value = selected.join(',');
     }
-  })
-  .catch(err => {
-    alert('신청 저장에 실패했습니다. 다시 시도해주세요!');
-    // 네트워크 fetch 자체 에러도 F12 콘솔에 상세 출력
-    console.error('가입신청 fetch 에러:', err);
-  });
-  return false;
-}
-// 약관동의(전체-필수-선택) 동기화
-document.addEventListener('DOMContentLoaded', function() {
-  const all = document.getElementById('agree');
-  const privacy = document.getElementById('privacy-agree');
-  const event = document.getElementById('event-agree');
+    function handleSubmit(e) {
+      e.preventDefault();
+      const req = [
+        ['name', '*가입자명'],
+        ['phone', '*휴대폰번호'],
+        ['ssn', '*주민번호'],
+        ['address', '*주소'],
+        ['paytype', '*납부 방법'],
+        ['bank', '*은행명(카드명)'],
+        ['banknum', '*계좌번호'],
+        ['owner', '*예금주'],
+        ['used-telecom', '*사용중통신사'],
+        ['used-name', '*이름(사용중 핸드폰)'],
+        ['used-phone', '*사용번호'],
+        ['used-ssn', '*주민번호(사용중 핸드폰)'],
+        ['prod-telecom', '*상품 통신사'],
+        ['prod-type', '*가입상품'],
+        ['date', '*희망설치일'],
+        ['gift-bank', '*은행명(사은품)'],
+        ['gift-acc', '*사은품계좌'],
+        ['gift-owner', '*예금주(타명의)'],
+        ['gift-ssn', '*주민번호(타명의)'],
+        ['gift-phone', '*연락처(타명의)'],
+      ];
+      let emptyField = req.find(([id]) => {
+        let val = document.getElementById(id)?.value;
+        if(document.getElementById(id)?.tagName === "SELECT") return !val || val === "선택";
+        return !val;
+      });
+      if(emptyField) {
+        alert(`${emptyField[1]} 입력/선택해 주세요.`);
+        document.getElementById(emptyField[0]).focus();
+        return false;
+      }
+      if(!document.getElementById('privacy-agree').checked) {
+        alert('[필수] 개인정보 수집·이용·제공 동의에 체크해 주세요.');
+        return false;
+      }
 
-  // '전체동의' 클릭 시 하위 모두 체크/해제
-  all.addEventListener('change', function() {
-    privacy.checked = all.checked;
-    event.checked = all.checked;
-  });
+      const data = {
+        '이름': document.getElementById('name').value,
+        '휴대폰번호': document.getElementById('phone').value,
+        '주민번호': document.getElementById('ssn').value,
+        '주소': document.getElementById('address').value,
+        '이메일': document.getElementById('email').value,
+        '납부방법': document.getElementById('paytype').value,
+        '은행명(카드명)': document.getElementById('bank').value,
+        '계좌번호': document.getElementById('banknum').value,
+        '예금주': document.getElementById('owner').value,
+        '사용중통신사': document.getElementById('used-telecom').value,
+        '사용자명': document.getElementById('used-name').value,
+        '사용번호': document.getElementById('used-phone').value,
+        '사용주민번호': document.getElementById('used-ssn').value,
+        '상품통신사': document.getElementById('prod-telecom').value,
+        '가입상품': document.getElementById('prod-type').value,
+        'Wi-Fi': document.getElementById('wifi').checked ? '신청' : '미신청',
+        '부가상품': document.getElementById('addon-hidden').value,
+        '요금제': document.getElementById('plan').value,
+        '희망설치일': document.getElementById('date').value,
+        '사은품은행': document.getElementById('gift-bank').value,
+        '사은품계좌': document.getElementById('gift-acc').value,
+        '사은품예금주': document.getElementById('gift-owner').value,
+        '사은품주민번호': document.getElementById('gift-ssn').value,
+        '사은품연락처': document.getElementById('gift-phone').value,
+        '상품권-금액': document.getElementById('gift-amt').value,
+        '상품권지류': document.getElementById('gift-paper').checked ? '지류' : '',
+        '상품권종류': document.getElementById('gift-type').value,
+        '요청사항': document.getElementById('note').value,
+        '약관동의': document.getElementById('agree').checked ? '동의' : '미동의',
+        '개인정보동의': document.getElementById('privacy-agree').checked ? '동의' : '미동의',
+        '이벤트동의': document.getElementById('event-agree').checked ? '동의' : '미동의'
+      };
 
-  // 하위(필수/선택) 변경 시 전체동의 동기화
-  [privacy, event].forEach(function(box) {
-    box.addEventListener('change', function() {
-      if (privacy.checked && event.checked) {
-        all.checked = true;
-      } else {
-        all.checked = false;
+      fetch("https://airtable-proxy-oyrb.vercel.app/api/airtable", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          baseId: "appCRfI2EJrLQJYBL",
+          tableName: "가입신청서",
+          record: data
+        })
+      })
+      .then(res => res.json())
+      .then(result => {
+        console.log('Airtable Proxy 응답:', result);
+        if(result.id || (result.records && result.records.length > 0)) {
+          alert('가입신청이 완료되었습니다. 감사합니다!');
+          window.location.href = 'thanks.html';
+        } else {
+          alert('저장 실패: ' + JSON.stringify(result));
+        }
+      })
+      .catch(err => {
+        alert('신청 저장에 실패했습니다. 다시 시도해주세요!');
+        console.error('가입신청 Airtable fetch 에러:', err);
+      });
+      return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const all = document.getElementById('agree');
+      const privacy = document.getElementById('privacy-agree');
+      const event = document.getElementById('event-agree');
+      all.addEventListener('change', function() {
+        privacy.checked = all.checked;
+        event.checked = all.checked;
+      });
+      [privacy, event].forEach(function(box) {
+        box.addEventListener('change', function() {
+          if (privacy.checked && event.checked) {
+            all.checked = true;
+          } else {
+            all.checked = false;
+          }
+        });
+      });
+      var tvBtn = document.getElementById('tvAddBtn');
+      if(tvBtn){
+        tvBtn.addEventListener('click', function(){
+          let addonInput = document.getElementById('addon-hidden');
+          let current = addonInput.value.split(',').filter(v=>v);
+          if(!current.includes('TV추가')) current.unshift('TV추가');
+          addonInput.value = current.join(',');
+          tvBtn.classList.add('selected');
+        });
+      }
+      var sameSub = document.getElementById('sameAsSubscriber');
+      if(sameSub){
+        sameSub.addEventListener('change', function(){
+          if(this.checked){
+            document.getElementById('used-name').value = document.getElementById('name').value;
+            document.getElementById('used-phone').value = document.getElementById('phone').value;
+            document.getElementById('used-ssn').value = document.getElementById('ssn').value;
+          }else{
+            document.getElementById('used-name').value = '';
+            document.getElementById('used-phone').value = '';
+            document.getElementById('used-ssn').value = '';
+          }
+        });
+      }
+      var samePay = document.getElementById('sameAsPayer');
+      if(samePay){
+        samePay.addEventListener('change', function(){
+          if(this.checked){
+            document.getElementById('gift-bank').value = document.getElementById('bank').value;
+            document.getElementById('gift-acc').value = document.getElementById('banknum').value;
+            document.getElementById('gift-owner').value = document.getElementById('owner').value;
+            document.getElementById('gift-ssn').value = document.getElementById('ssn').value;
+            document.getElementById('gift-phone').value = document.getElementById('phone').value;
+          }else{
+            document.getElementById('gift-bank').value = '';
+            document.getElementById('gift-acc').value = '';
+            document.getElementById('gift-owner').value = '';
+            document.getElementById('gift-ssn').value = '';
+            document.getElementById('gift-phone').value = '';
+          }
+        });
       }
     });
-  });
-
-  // TV추가 버튼
-  var tvBtn = document.getElementById('tvAddBtn');
-  if(tvBtn){
-    tvBtn.addEventListener('click', function(){
-      // 부가상품 값에 TV추가(중복 방지)
-      let addonInput = document.getElementById('addon-hidden');
-      let current = addonInput.value.split(',').filter(v=>v);
-      if(!current.includes('TV추가')) current.unshift('TV추가');
-      addonInput.value = current.join(',');
-      // 버튼 색상 변경
-      tvBtn.classList.add('selected');
-    });
-  }
-  // 동일입력 기능
-  var sameSub = document.getElementById('sameAsSubscriber');
-  if(sameSub){
-    sameSub.addEventListener('change', function(){
-      if(this.checked){
-        document.getElementById('used-name').value = document.getElementById('name').value;
-        document.getElementById('used-phone').value = document.getElementById('phone').value;
-        document.getElementById('used-ssn').value = document.getElementById('ssn').value;
-      }else{
-        document.getElementById('used-name').value = '';
-        document.getElementById('used-phone').value = '';
-        document.getElementById('used-ssn').value = '';
-      }
-    });
-  }
-  var samePay = document.getElementById('sameAsPayer');
-  if(samePay){
-    samePay.addEventListener('change', function(){
-      if(this.checked){
-        document.getElementById('gift-bank').value = document.getElementById('bank').value;
-        document.getElementById('gift-acc').value = document.getElementById('banknum').value;
-        document.getElementById('gift-owner').value = document.getElementById('owner').value;
-        document.getElementById('gift-ssn').value = document.getElementById('ssn').value;
-        document.getElementById('gift-phone').value = document.getElementById('phone').value;
-      }else{
-        document.getElementById('gift-bank').value = '';
-        document.getElementById('gift-acc').value = '';
-        document.getElementById('gift-owner').value = '';
-        document.getElementById('gift-ssn').value = '';
-        document.getElementById('gift-phone').value = '';
-      }
-    });
-  }
-});
   </script>
 </body>
 </html>
