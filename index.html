@@ -7,10 +7,7 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <style>
     body {font-family: 'Malgun Gothic', sans-serif;background: #f7faff;margin: 0;padding: 0;}
-    .banner-img {width: 100%;
-    display: block;
-    margin-bottom: 20px;
-    border-bottom: 3px solid #e5eefc;}
+    .banner-img {width: 100%; display: block; margin-bottom: 20px; border-bottom: 3px solid #e5eefc;}
     .wrapper {max-width: 860px;margin: auto;background: #fff;border-radius: 16px;box-shadow: 0 0 18px 0 rgba(0,0,0,0.08);padding: 45px 30px 40px 30px;}
     .header {display: flex;justify-content: space-between;align-items: flex-end;border-bottom: 1px solid #ddd;padding-bottom: 18px;margin-bottom: 36px;}
     .header h2 {font-size: 25px;font-weight: bold;margin: 0;color: #072053;}
@@ -74,7 +71,7 @@
   <div class="wrapper">
     <div class="header">
       <h2>가입신청서</h2>
-      <p>신청완료 후 담당자가 확인 후 연락드립니다.6</p>
+      <p>신청완료 후 담당자가 확인 후 연락드립니다.</p>
     </div>
     <form id="applicationForm" onsubmit="return handleSubmit(event)">
       <!-- 가입자정보 -->
@@ -178,6 +175,15 @@
               <input type="text" id="used-ssn" maxlength="14" placeholder="예: 900101-2******" oninput="autoDashSSN(this)">
             </td>
           </tr>
+          <!-- 체크박스 + 설명문구 오른쪽 -->
+          <tr>
+            <th></th>
+            <td>
+              <label class="checkbox">
+                <input type="checkbox" id="sameAsSubscriber"> 가입자정보와 동일
+              </label>
+            </td>
+          </tr>
         </table>
       </div>
 
@@ -212,17 +218,21 @@
               </label>
             </td>
           </tr>
-          <tr>
-            <th>*부가상품</th>
-            <td>
-              <div class="addon-btns">
-                <button type="button" class="addon-btn" data-value="유심" onclick="toggleAddon(this)">유심</button>
-                <button type="button" class="addon-btn" data-value="정수기" onclick="toggleAddon(this)">정수기</button>
-                <button type="button" class="addon-btn" data-value="CCTV" onclick="toggleAddon(this)">CCTV</button>
-              </div>
-              <input type="hidden" id="addon-hidden">
-            </td>
-          </tr>
+          <!-- 부가상품 영역 -->
+<tr>
+  <th>*부가상품</th>
+  <td>
+    <div class="addon-btns">
+  <button type="button" class="addon-btn" data-value="유심" onclick="toggleAddon(this)">유심</button>
+  <button type="button" class="addon-btn" data-value="TV추가" onclick="toggleAddon(this)">
+    TV추가 <span style="font-size:13px;color:#666;margin-left:7px;">(TV 추가 신청시 체크)</span>
+  </button>
+  <button type="button" class="addon-btn" data-value="정수기" onclick="toggleAddon(this)">정수기</button>
+  <button type="button" class="addon-btn" data-value="CCTV" onclick="toggleAddon(this)">CCTV</button>
+</div>
+<input type="hidden" id="addon-hidden">
+  </td>
+</tr>
           <tr>
             <th>요금제</th>
             <td><input type="text" id="plan"></td>
@@ -256,7 +266,7 @@
           </tr>
           <tr>
             <th>*연락처(타명의)</th>
-  <td><input type="text" id="gift-phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)"></td>
+            <td><input type="text" id="gift-phone" maxlength="13" placeholder="010-0000-0000" oninput="autoDashPhone(this)"></td>
           </tr>
           <tr>
             <th>상품권-금액</th>
@@ -364,6 +374,14 @@
               </select>
             </td>
           </tr>
+          <tr>
+            <th></th>
+            <td>
+              <label class="checkbox">
+                <input type="checkbox" id="sameAsPayer"> 납부자정보와 동일
+              </label>
+            </td>
+          </tr>
         </table>
       </div>
 
@@ -439,13 +457,13 @@
       }
     }
     // 부가상품 버튼 토글
-    function toggleAddon(btn) {
-      btn.classList.toggle('selected');
-      let selected = Array.from(document.querySelectorAll('.addon-btn.selected')).map(b=>b.dataset.value);
-      document.getElementById('addon-hidden').value = selected.join(',');
-    }
+    // JS
+function toggleAddon(btn) {
+  btn.classList.toggle('selected');
+  let selected = Array.from(document.querySelectorAll('.addon-btn.selected')).map(b => b.dataset.value);
+  document.getElementById('addon-hidden').value = selected.join(',');
+}
     // 가입신청 제출 처리
-    // ========================== (여기서부터 복붙) ==========================
 function handleSubmit(e) {
   e.preventDefault();
   const req = [
@@ -519,34 +537,29 @@ function handleSubmit(e) {
   이벤트동의: document.getElementById('event-agree').checked ? '동의' : '미동의'
 };
 
+  // 실제 문자 발송은 Google Apps Script(백엔드)에서 아래와 같이 처리 필요
+  // 1. 서버에서 SENS 문자 전송하도록 구현(프론트에서 키 직접 사용 X)
+  // 2. 아래 fetch 호출 시 Google Apps Script에서 SENS 문자까지 함께 처리
   fetch("https://script.google.com/macros/s/AKfycbwzdJ-DJ1FiSp0btZ90m8laF_b05s_OpA5_4X-HQYnazGKiuHxAj3R2jz_xnyKGejgxNw/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  body: new URLSearchParams(data).toString()
-})
-.then(res => res.text())
-.then(result => {
-  if(result.includes('완료')) {
-    alert('가입신청이 완료되었습니다. 감사합니다!');
-    window.location.href = 'thanks.html';
-  } else {
-    alert(result); // 에러 메시지 그대로 노출
-  }
-})
-.catch(err => {
-  alert('신청 저장에 실패했습니다. 다시 시도해주세요!');
-  console.error(err);
-});
-
-
-// ========================== (여기까지 복붙) ==========================
-      
-      // 문자 전송(01071716361)
-  
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(res => res.text())
+  .then(result => {
+    if(result.includes('완료')) {
       alert('가입신청이 완료되었습니다. 감사합니다!');
       window.location.href = 'thanks.html';
-      return false;
+    } else {
+      alert(result); // 에러 메시지 그대로 노출
     }
+  })
+  .catch(err => {
+    alert('신청 저장에 실패했습니다. 다시 시도해주세요!');
+    console.error(err);
+  });
+  return false;
+}
 // 약관동의(전체-필수-선택) 동기화
 document.addEventListener('DOMContentLoaded', function() {
   const all = document.getElementById('agree');
@@ -569,6 +582,53 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // TV추가 버튼
+  var tvBtn = document.getElementById('tvAddBtn');
+  if(tvBtn){
+    tvBtn.addEventListener('click', function(){
+      // 부가상품 값에 TV추가(중복 방지)
+      let addonInput = document.getElementById('addon-hidden');
+      let current = addonInput.value.split(',').filter(v=>v);
+      if(!current.includes('TV추가')) current.unshift('TV추가');
+      addonInput.value = current.join(',');
+      // 버튼 색상 변경
+      tvBtn.classList.add('selected');
+    });
+  }
+  // 동일입력 기능
+  var sameSub = document.getElementById('sameAsSubscriber');
+  if(sameSub){
+    sameSub.addEventListener('change', function(){
+      if(this.checked){
+        document.getElementById('used-name').value = document.getElementById('name').value;
+        document.getElementById('used-phone').value = document.getElementById('phone').value;
+        document.getElementById('used-ssn').value = document.getElementById('ssn').value;
+      }else{
+        document.getElementById('used-name').value = '';
+        document.getElementById('used-phone').value = '';
+        document.getElementById('used-ssn').value = '';
+      }
+    });
+  }
+  var samePay = document.getElementById('sameAsPayer');
+  if(samePay){
+    samePay.addEventListener('change', function(){
+      if(this.checked){
+        document.getElementById('gift-bank').value = document.getElementById('bank').value;
+        document.getElementById('gift-acc').value = document.getElementById('banknum').value;
+        document.getElementById('gift-owner').value = document.getElementById('owner').value;
+        document.getElementById('gift-ssn').value = document.getElementById('ssn').value;
+        document.getElementById('gift-phone').value = document.getElementById('phone').value;
+      }else{
+        document.getElementById('gift-bank').value = '';
+        document.getElementById('gift-acc').value = '';
+        document.getElementById('gift-owner').value = '';
+        document.getElementById('gift-ssn').value = '';
+        document.getElementById('gift-phone').value = '';
+      }
+    });
+  }
 });
   </script>
 </body>
