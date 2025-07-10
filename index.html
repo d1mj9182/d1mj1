@@ -522,7 +522,7 @@
         '이벤트동의': document.getElementById('event-agree').checked ? '동의' : '미동의'
       };
 
-      fetch("https://airtable-proxy-oyrb.vercel.app/api/airtable", {
+      fetch("https://airtable-proxy-oyrb.vercel.app/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
